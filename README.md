@@ -5,7 +5,7 @@ The app allows users to:
 
 - **Send USDC** to any address (P2P transfers).  
 - **Pay Bills** (utilities, internet, etc.) using USDC.  
-- **Off-Ramp USDC** into local currency (e.g., UGX, KES, NGN).  
+- **Off-Ramp USDC** into local currency (e.g., UGX).  
 
 The goal is to bridge stablecoins with real-world use cases while keeping the experience simple and accessible.
 
