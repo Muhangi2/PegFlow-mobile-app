@@ -1,4 +1,4 @@
-# StablePay – USDC Utility App
+# PegFlow – USDC Utility App
 
 StablePay is a lightweight application that makes USDC (a stablecoin) useful in everyday life.  
 The app allows users to:
