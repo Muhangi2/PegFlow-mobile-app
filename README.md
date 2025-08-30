@@ -11,7 +11,7 @@ The goal is to bridge stablecoins with real-world use cases while keeping the ex
 
 ---
 
-## 🚀 Features
+##  Features
 
 1. **Send USDC (P2P)**
    - Transfer USDC to any wallet address instantly.
@@ -27,10 +27,10 @@ The goal is to bridge stablecoins with real-world use cases while keeping the ex
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠 Tech Stack
 
-- **Frontend:** React / Next.js + TailwindCSS  
-- **Backend:** Node.js (Express) or NestJS  
+- **Frontend:** ReactNative
+- **Backend:** Node.js (Express)   
 - **Database:** PostgreSQL / MongoDB  
 - **Blockchain:** Ethereum / Polygon / Solana (for USDC transfers)  
 - **Payments Integration:** Mobile Money APIs (MTN Momo, Airtel Money, Flutterwave, Paystack, etc.)  
