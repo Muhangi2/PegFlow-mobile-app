@@ -32,7 +32,7 @@ The goal is to bridge stablecoins with real-world use cases while keeping the ex
 - **Frontend:** ReactNative
 - **Backend:** Node.js (Express)   
 - **Database:** PostgreSQL / MongoDB  
-- **Blockchain:** Ethereum / Polygon / Solana (for USDC transfers)  
+- **Blockchain:** Stellar 
 - **Payments Integration:** Mobile Money APIs (MTN Momo, Airtel Money, Flutterwave, Paystack, etc.)  
 
 ---
