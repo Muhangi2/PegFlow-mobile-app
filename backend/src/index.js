@@ -51,7 +51,7 @@ app.get('/health', (req, res) => {
   res.status(200).json({
     status: 'OK',
     timestamp: new Date().toISOString(),
-    service: 'StablePay Backend API',
+    service: 'Payvia Backend API',
     version: '1.0.0'
   });
 });
@@ -67,7 +67,7 @@ app.use('/api/mobile-money', authMiddleware, mobileMoneyRoutes);
 // API documentation
 app.get('/api', (req, res) => {
   res.json({
-    message: 'StablePay API v1.0.0',
+    message: 'Payvia API v1.0.0',
     endpoints: {
       auth: '/api/auth',
       users: '/api/users',
@@ -93,7 +93,7 @@ app.use(errorHandler);
 
 // Start server
 app.listen(PORT, () => {
-  logger.info(`StablePay Backend API running on port ${PORT}`);
+  logger.info(`Payvia Backend API running on port ${PORT}`);
   logger.info(`Environment: ${process.env.NODE_ENV || 'development'}`);
   logger.info(`Health check: http://localhost:${PORT}/health`);
 });

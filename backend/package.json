@@ -1,7 +1,7 @@
 {
-  "name": "stablepay-backend",
+  "name": "payvia-backend",
   "version": "1.0.0",
-  "description": "StablePay Backend API - USDC Utility App",
+  "description": "Payvia Backend API - USDC Utility App",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -12,14 +12,14 @@
     "build:app": "echo 'Backend built successfully'"
   },
   "keywords": [
-    "stablepay",
+    "payvia",
     "usdc",
     "stellar",
     "soroban",
     "mobile-money",
     "bill-payments"
   ],
-  "author": "StablePay Team",
+  "author": "Payvia Team",
   "license": "MIT",
   "dependencies": {
     "express": "^4.18.2",

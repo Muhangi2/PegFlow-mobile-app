@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "StablePay",
-    "slug": "StablePay",
+    "name": "Payvia",
+    "slug": "Payvia",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "stablepay",
+    "scheme": "payvia",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -17,7 +17,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.anonymous.StablePay"
+      "package": "com.anonymous.Payvia"
     },
     "web": {
       "bundler": "metro",

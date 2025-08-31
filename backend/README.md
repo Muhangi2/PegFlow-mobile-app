@@ -1,6 +1,6 @@
-# StablePay Backend API
+# Payvia Backend API
 
-A comprehensive backend API for StablePay - the USDC utility app that makes stablecoins useful in everyday life.
+A comprehensive backend API for Payvia - the USDC utility app that makes USDC useful in everyday life.
 
 ## 🚀 Features
 
@@ -58,7 +58,7 @@ A comprehensive backend API for StablePay - the USDC utility app that makes stab
 4. **Set up database**
    ```bash
    # Create PostgreSQL database
-   createdb stablepay
+   createdb payvia
    
    # Run migrations (if using a migration tool)
    npm run migrate
@@ -176,7 +176,7 @@ Validate account number
 
 ## 🔗 Smart Contract Integration
 
-The backend integrates with the StablePay Soroban smart contract:
+The backend integrates with the Payvia Soroban smart contract:
 
 ### Contract Functions
 - `register_user`: Register new users
@@ -195,7 +195,7 @@ cd ../payvia
 cargo build --target wasm32-unknown-unknown --release
 
 # Deploy to Soroban testnet
-soroban contract deploy --wasm target/wasm32-unknown-unknown/release/stablepay.wasm --network testnet
+soroban contract deploy --wasm target/wasm32-unknown-unknown/release/payvia.wasm --network testnet
 ```
 
 ## 🏦 Mobile Money Integration
@@ -251,10 +251,10 @@ npm test -- --testNamePattern="auth"
 ### Docker Deployment
 ```bash
 # Build image
-docker build -t stablepay-backend .
+docker build -t payvia-backend .
 
 # Run container
-docker run -p 3000:3000 --env-file .env stablepay-backend
+docker run -p 3000:3000 --env-file .env payvia-backend
 ```
 
 ### Production Checklist

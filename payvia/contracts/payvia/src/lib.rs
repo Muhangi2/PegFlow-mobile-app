@@ -4,7 +4,7 @@ use soroban_sdk::{
 };
 
 #[contract]
-pub struct StablePay;
+pub struct Payvia;
 
 #[contracttype]
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -41,7 +41,7 @@ pub struct Withdrawal {
 }
 
 #[contractimpl]
-impl StablePay {
+impl Payvia {
     // Initialize the contract
     pub fn init(env: Env) {
         // Set up initial data structures
