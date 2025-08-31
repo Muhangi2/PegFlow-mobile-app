@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "BitPay",
-    "slug": "BitPay",
+    "name": "StablePay",
+    "slug": "StablePay",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "bitpay",
+    "scheme": "stablepay",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -17,7 +17,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.anonymous.BitPay"
+      "package": "com.anonymous.StablePay"
     },
     "web": {
       "bundler": "metro",

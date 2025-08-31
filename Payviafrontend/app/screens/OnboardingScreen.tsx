@@ -16,18 +16,18 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ navigation }) => {
   const onboardingData = [
     {
       icon: 'send-outline',
-      title: 'Send Money Globally',
-      description: 'Send money to family and friends anywhere in the world with low fees using Stellar blockchain.',
+      title: 'Send USDC Globally',
+      description: 'Send USDC to family and friends anywhere in the world with low fees using Stellar blockchain.',
     },
     {
-      icon: 'card-outline',
-      title: 'Virtual USD Cards',
-      description: 'Get virtual cards for online shopping and international payments. Shop globally from Uganda.',
+      icon: 'receipt-outline',
+      title: 'Pay Bills with USDC',
+      description: 'Pay for utilities, internet, airtime, and other bills directly with your USDC balance.',
     },
     {
-      icon: 'star-outline',
-      title: 'Save in Stellar',
-      description: 'Protect your savings from inflation. Auto-save in Stellar Lumens (XLM) and build wealth over time.',
+      icon: 'cash-outline',
+      title: 'Withdraw to Local Currency',
+      description: 'Convert USDC to Uganda Shillings and receive funds via mobile money or bank transfer.',
     },
   ];
 

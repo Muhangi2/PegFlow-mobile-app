@@ -4,9 +4,9 @@ import { ActivityIndicator, Alert, Animated, Easing, Platform, StyleSheet, Text,
 import StellarMobileMoneyService from '../../services/StellarMobileMoneyService';
 
 const currencies = [
+  { label: 'USDC', icon: 'logo-usd' },
   { label: 'UGX', icon: 'cash-outline' },
   { label: 'USD', icon: 'logo-usd' },
-  { label: 'XLM', icon: 'star-outline' },
 ];
 
 const CARD_SHADOW = {
@@ -19,7 +19,7 @@ const CARD_SHADOW = {
 
 const SendMoneyScreen: React.FC = () => {
   const [mode, setMode] = useState<'send' | 'receive'>('send');
-  const [currency, setCurrency] = useState('UGX');
+  const [currency, setCurrency] = useState('USDC');
   const [recipient, setRecipient] = useState('');
   const [amount, setAmount] = useState('');
   const [loading, setLoading] = useState(false);
@@ -52,20 +52,20 @@ const SendMoneyScreen: React.FC = () => {
       Alert.alert('Error', 'Please enter recipient and amount.');
       return;
     }
-    if (currency === 'XLM') {
+    if (currency === 'USDC') {
       setLoading(true);
       try {
         await service.sendToMobile(recipient, parseFloat(amount), 'MTN');
-        Alert.alert('Success', `${mode === 'send' ? 'Sent' : 'Requested'} ${amount} XLM ${mode === 'send' ? 'to' : 'from'} ${recipient}!`);
+        Alert.alert('Success', `${mode === 'send' ? 'Sent' : 'Requested'} ${amount} USDC ${mode === 'send' ? 'to' : 'from'} ${recipient}!`);
         setRecipient('');
         setAmount('');
       } catch (e) {
-        Alert.alert('Error', 'Failed to send asset.');
+        Alert.alert('Error', 'Failed to send USDC.');
       } finally {
         setLoading(false);
       }
     } else {
-      Alert.alert('Not Supported', 'Only XLM is supported for sending at this time.');
+      Alert.alert('Not Supported', 'Only USDC is supported for sending at this time.');
     }
   };
 

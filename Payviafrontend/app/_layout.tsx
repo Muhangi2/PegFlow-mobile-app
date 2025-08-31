@@ -11,6 +11,8 @@ import ProfileScreen from './screens/ProfileScreen';
 import SendMoneyScreen from './screens/SendMoneyScreen';
 import SplashScreen from './screens/SplashScreen';
 import TransactionHistoryScreen from './screens/TransactionHistoryScreen';
+import BillPaymentScreen from './screens/BillPaymentScreen';
+import WithdrawScreen from './screens/WithdrawScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -25,6 +27,10 @@ function MainTabs() {
             iconName = focused ? 'wallet' : 'wallet-outline';
           } else if (route.name === 'Send') {
             iconName = focused ? 'send' : 'send-outline';
+          } else if (route.name === 'PayBills') {
+            iconName = focused ? 'receipt' : 'receipt-outline';
+          } else if (route.name === 'Withdraw') {
+            iconName = focused ? 'cash-outline' : 'cash-outline';
           } else if (route.name === 'History') {
             iconName = focused ? 'time' : 'time-outline';
           } else if (route.name === 'Profile') {
@@ -39,6 +45,8 @@ function MainTabs() {
     >
       <Tab.Screen name="Dashboard" component={DashboardScreen} />
       <Tab.Screen name="Send" component={SendMoneyScreen} />
+      <Tab.Screen name="PayBills" component={BillPaymentScreen} />
+      <Tab.Screen name="Withdraw" component={WithdrawScreen} />
       <Tab.Screen name="History" component={TransactionHistoryScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>

@@ -38,7 +38,7 @@ const TransactionHistoryScreen: React.FC = () => {
         <Text style={styles.date}>{item.date}</Text>
       </View>
       <Text style={[styles.amount, item.type === 'send' ? styles.negative : styles.positive]}>
-        {item.type === 'send' ? '-' : '+'}{item.amount} XLM
+        {item.type === 'send' ? '-' : '+'}{item.amount} USDC
       </Text>
     </View>
   );

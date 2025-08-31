@@ -21,10 +21,10 @@ type DashboardScreenProps = {
 
 const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
-  const [balances, setBalances] = useState<{ ugx: number; usd: number; xlm: number }>({
+  const [balances, setBalances] = useState<{ ugx: number; usd: number; usdc: number }>({
     ugx: 1250000,
     usd: 340.5,
-    xlm: 0,
+    usdc: 0,
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -35,8 +35,8 @@ const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) => {
     setLoading(true);
     setError(null);
     try {
-      const xlm = await service.getBalance();
-      setBalances((prev) => ({ ...prev, xlm }));
+      const usdc = await service.getBalance();
+      setBalances((prev) => ({ ...prev, usdc }));
     } catch (e) {
       setError('Failed to fetch balances');
     } finally {
@@ -55,10 +55,10 @@ const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) => {
   };
 
   const quickActions = [
-    { icon: 'send', title: 'Send Money', screen: 'Send', color: '#0A6DD1' },
-    { icon: 'card', title: 'Virtual Card', color: '#4285F4' },
-    { icon: 'trending-up', title: 'Buy Stellar', color: '#06B6D4' },
-    { icon: 'swap-horizontal', title: 'Exchange', color: '#34A853' },
+    { icon: 'send', title: 'Send USDC', screen: 'Send', color: '#0A6DD1' },
+    { icon: 'receipt', title: 'Pay Bills', screen: 'PayBills', color: '#4285F4' },
+    { icon: 'cash-outline', title: 'Withdraw', screen: 'Withdraw', color: '#06B6D4' },
+    { icon: 'time', title: 'History', screen: 'History', color: '#34A853' },
   ];
 
   const CARD_SHADOW = {
@@ -87,7 +87,7 @@ const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) => {
         {/* Exchange rates */}
         <View style={{ marginTop: 18 }}>
           <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>
-            XLM/USD: ${rates.XLMUSD}
+            USDC/USD: $1.00
           </Text>
         </View>
       </LinearGradient>
@@ -103,8 +103,8 @@ const DashboardScreen: React.FC<DashboardScreenProps> = ({ navigation }) => {
               <Text style={styles.balanceAmount}>${balances.usd}</Text>
             </View>
             <View style={styles.balanceRight}>
-              <Text style={styles.balanceLabel}>Stellar Lumens (XLM)</Text>
-              <Text style={styles.balanceAmount}>{loading ? <ActivityIndicator size="small" color="#06B6D4" /> : `${balances.xlm} XLM`}</Text>
+              <Text style={styles.balanceLabel}>USDC</Text>
+              <Text style={styles.balanceAmount}>{loading ? <ActivityIndicator size="small" color="#06B6D4" /> : `${balances.usdc} USDC`}</Text>
             </View>
           </View>
         </View>
