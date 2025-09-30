@@ -4,10 +4,15 @@ const { logger } = require('../utils/logger');
 
 class UserService {
   constructor() {
-    // In a real implementation, this would be a database connection
+    const { database } = require('../config/database');
+    this.db = database;
+    
+    // Fallback to in-memory storage for development
     this.users = new Map();
     this.blacklistedTokens = new Set();
     this.passwordResetTokens = new Map();
+    
+    logger.warn('UserService: Using in-memory storage. Configure DATABASE_URL for production.');
   }
 
   /**

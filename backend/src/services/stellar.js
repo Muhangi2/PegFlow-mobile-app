@@ -13,9 +13,14 @@ class StellarService {
     // Initialize Stellar SDK
     this.server = new StellarSdk.Server(this.horizonUrl);
     
-    // Mock data for development (replace with actual database)
+    const { database } = require('../config/database');
+    this.db = database;
+    
+    // Fallback to in-memory storage for development
     this.userBalances = new Map();
     this.transactions = new Map();
+    
+    logger.warn('StellarService: Using in-memory storage. Configure DATABASE_URL for production.');
   }
 
   /**
@@ -40,10 +45,33 @@ class StellarService {
    */
   async sendUSDC(fromUserId, toUserId, amount) {
     try {
+      // Input validation
+      if (!fromUserId || !toUserId || !amount) {
+        const error = new Error('Missing required parameters');
+        error.code = 'VALIDATION_ERROR';
+        throw error;
+      }
+
+      if (amount <= 0) {
+        const error = new Error('Amount must be greater than zero');
+        error.code = 'INVALID_AMOUNT';
+        throw error;
+      }
+
+      if (fromUserId === toUserId) {
+        const error = new Error('Cannot send money to yourself');
+        error.code = 'INVALID_RECIPIENT';
+        throw error;
+      }
+
       // Validate sender has sufficient balance
       const senderBalance = this.userBalances.get(fromUserId) || 0;
       if (senderBalance < amount) {
-        throw new Error('Insufficient balance');
+        const error = new Error('Insufficient balance');
+        error.code = 'INSUFFICIENT_BALANCE';
+        error.currentBalance = senderBalance;
+        error.requiredAmount = amount;
+        throw error;
       }
 
       // Update balances
@@ -77,7 +105,17 @@ class StellarService {
       };
     } catch (error) {
       logger.error('Send USDC error:', error);
-      throw new Error('Failed to send USDC');
+      
+      // Re-throw with original error code if it exists
+      if (error.code) {
+        throw error;
+      }
+      
+      // Create new error with proper code
+      const stellarError = new Error('Failed to send USDC');
+      stellarError.code = 'STELLAR_SERVICE_ERROR';
+      stellarError.originalError = error.message;
+      throw stellarError;
     }
   }
 

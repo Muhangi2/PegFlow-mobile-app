@@ -37,13 +37,25 @@ const errorHandler = (err, req, res, next) => {
 
   // JWT errors
   if (err.name === 'JsonWebTokenError') {
-    const message = 'Invalid token';
-    error = { message, statusCode: 401 };
+    const message = 'Invalid authentication token';
+    error = { message, statusCode: 401, code: 'INVALID_TOKEN' };
   }
 
   if (err.name === 'TokenExpiredError') {
-    const message = 'Token expired';
-    error = { message, statusCode: 401 };
+    const message = 'Authentication token has expired';
+    error = { message, statusCode: 401, code: 'TOKEN_EXPIRED' };
+  }
+
+  // Stellar/Blockchain errors
+  if (err.message && err.message.includes('Stellar')) {
+    const message = 'Blockchain service temporarily unavailable';
+    error = { message, statusCode: 503, code: 'BLOCKCHAIN_ERROR' };
+  }
+
+  // Payment provider errors
+  if (err.message && (err.message.includes('MTN') || err.message.includes('Airtel'))) {
+    const message = 'Mobile money service temporarily unavailable';
+    error = { message, statusCode: 503, code: 'PAYMENT_PROVIDER_ERROR' };
   }
 
   // Rate limit errors
@@ -65,12 +77,22 @@ const errorHandler = (err, req, res, next) => {
 
   // Default error
   const statusCode = error.statusCode || err.statusCode || 500;
-  const message = error.message || 'Server Error';
+  const message = error.message || 'Internal server error';
+  const code = error.code || 'INTERNAL_ERROR';
 
   res.status(statusCode).json({
     success: false,
-    error: message,
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
+    error: {
+      message,
+      code,
+      timestamp: new Date().toISOString(),
+      path: req.originalUrl,
+      method: req.method
+    },
+    ...(process.env.NODE_ENV === 'development' && { 
+      stack: err.stack,
+      details: err 
+    })
   });
 };
 

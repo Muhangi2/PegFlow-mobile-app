@@ -10,6 +10,14 @@ const userService = new UserService();
  */
 const authMiddleware = async (req, res, next) => {
   try {
+    // Validate JWT_SECRET exists
+    if (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 32) {
+      logger.error('JWT_SECRET is not properly configured or too short');
+      return res.status(500).json({
+        error: 'Authentication service configuration error'
+      });
+    }
+
     // Get token from header
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -19,6 +27,13 @@ const authMiddleware = async (req, res, next) => {
     }
 
     const token = authHeader.split(' ')[1];
+    
+    // Validate token format
+    if (!token || token.split('.').length !== 3) {
+      return res.status(401).json({
+        error: 'Invalid token format'
+      });
+    }
 
     // Check if token is blacklisted
     const isBlacklisted = await userService.isTokenBlacklisted(token);

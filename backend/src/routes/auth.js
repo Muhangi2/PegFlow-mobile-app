@@ -18,9 +18,11 @@ const userService = new UserService();
  */
 router.post('/register', [
   body('phone').isMobilePhone('en-UG').withMessage('Valid Ugandan phone number required'),
-  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
-  body('name').notEmpty().withMessage('Name is required'),
-  body('email').optional().isEmail().withMessage('Valid email required')
+  body('password')
+    .isLength({ min: 8 }).withMessage('Password must be at least 8 characters')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/).withMessage('Password must contain at least one lowercase letter, one uppercase letter, one number and one special character'),
+  body('name').notEmpty().isLength({ min: 2, max: 50 }).withMessage('Name must be between 2 and 50 characters'),
+  body('email').optional().isEmail().normalizeEmail().withMessage('Valid email required')
 ], async (req, res) => {
   try {
     // Check for validation errors
@@ -47,11 +49,20 @@ router.post('/register', [
       email
     });
 
-    // Generate JWT token
+    // Generate JWT token with additional security claims
     const token = jwt.sign(
-      { id: user.id, phone: user.phone },
+      { 
+        id: user.id, 
+        phone: user.phone,
+        iat: Math.floor(Date.now() / 1000),
+        jti: require('crypto').randomBytes(16).toString('hex') // JWT ID for token blacklisting
+      },
       process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
+      { 
+        expiresIn: process.env.JWT_EXPIRES_IN || '24h', // Reduced from 7d for security
+        issuer: 'payvia-backend',
+        audience: 'payvia-app'
+      }
     );
 
     logger.info(`New user registered: ${phone}`);
